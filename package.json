@@ -36,7 +36,7 @@
     "scripts": {
         "start": "npm run build && node dist/bundle.js",
         "start:dev": "nodemon dist/bundle.js",
-        "build": "webpack --config webpack.prod.js --watch --progress --colors",
+        "build": "webpack --config webpack.prod.js --progress --colors",
         "build:dev": "webpack --config webpack.dev.js --watch --progress --colors",
         "lint": "eslint src/**/*.ts"
     },

@@ -16,6 +16,17 @@ module.exports = {
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.purs$/,
+                use: [
+                    {
+                        loader: "purs-loader",
+                        options: {
+                            src: ["bower_components/purescript-*/src/**/*.purs", "src/**/*.purs"],
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {

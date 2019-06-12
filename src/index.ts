@@ -1,9 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 
-// Including PureScript modules
-// @ts-ignore
-import Utils from "purs-loader?modules!./modules/Utils.purs";
+import Utils from "./modules/Utils.purs";
 
 import { getPosts } from "./controllers/PostController";
 
@@ -19,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/gcd/:first/:second", (req, res) => {
+    // @ts-ignore
     return res.status(200).json({ gcd: Utils.gcd(req.params.first)(req.params.second) });
 });
 
