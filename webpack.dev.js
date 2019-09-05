@@ -2,9 +2,7 @@ const path = require("path");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-    // Entrypoint
     entry: "./src/index.ts",
-    // Make sure we don't touch native libs
     target: "node",
     mode: "development",
     devtool: "inline-source-map",
@@ -30,7 +28,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".purs"],
+        extensions: [".ts", ".js", ".purs"],
     },
     output: {
         filename: "bundle.js",
@@ -40,6 +38,5 @@ module.exports = {
         fs: "empty",
         net: "empty",
     },
-    // Dotenv plugin
     plugins: [new Dotenv()],
 };

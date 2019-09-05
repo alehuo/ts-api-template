@@ -3,14 +3,11 @@ const Dotenv = require("dotenv-webpack");
 const Minimify = require("babel-minify-webpack-plugin");
 
 module.exports = {
-    // Entrypoint
     entry: "./src/index.ts",
-    // Make sure we don't touch native libs
     target: "node",
     mode: "production",
     module: {
         rules: [
-            // TypeScript
             {
                 test: /\.tsx?$/,
                 use: "ts-loader",
@@ -40,6 +37,5 @@ module.exports = {
         fs: "empty",
         net: "empty",
     },
-    // Dotenv plugin
     plugins: [new Dotenv(), new Minimify()],
 };

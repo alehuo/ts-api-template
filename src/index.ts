@@ -1,26 +1,22 @@
 import express from "express";
 import helmet from "helmet";
-
-import Utils from "./modules/Utils.purs";
-
-import { getPosts } from "./controllers/PostController";
+import GcdController from "./controllers/GcdController";
+import PostController from "./controllers/PostController";
+import { port } from "./config";
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 
-const port = Number(process.env.PORT || 8080);
-
-app.get("/posts", getPosts);
-
-app.get("/", (req, res) => {
-    return res.send("Try /posts or /gcd/:first/:second");
-});
-
-app.get("/gcd/:first/:second", (req, res) => {
-    // @ts-ignore
-    return res.status(200).json({ gcd: Utils.gcd(req.params.first)(req.params.second) });
-});
+app.use("/posts", PostController);
+app.use("/gcd", GcdController);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
+});
+
+process.on("SIGINT", () => {
+    console.error("Shutting down API");
+    process.exit();
 });
