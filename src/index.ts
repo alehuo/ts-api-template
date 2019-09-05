@@ -1,8 +1,10 @@
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+
 import GcdController from "./controllers/GcdController";
 import PostController from "./controllers/PostController";
+
 import { port } from "./config";
 
 const app = express();

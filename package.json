@@ -34,7 +34,7 @@
         "webpack-dev-server": "^3.7.1"
     },
     "scripts": {
-        "start": "npm run build && node dist/bundle.js",
+        "start": "node dist/bundle.js",
         "start:dev": "nodemon dist/bundle.js",
         "build": "webpack --config webpack.prod.js --progress --colors",
         "build:dev": "webpack --config webpack.dev.js --watch --progress --colors",
