@@ -1,5 +1,7 @@
 # ts-api-template
 
+![](assets/img/ts-api-1x.png)
+
 A template for boilerplating a Node.js TypeScript Express API. Support for importing PureScript modules is included. Database migrations are made with Sequelize.
 
 ## Requirements
