@@ -1,5 +1,4 @@
 const path = require("path");
-const Dotenv = require("dotenv-webpack");
 
 module.exports = {
     entry: "./src/index.ts",
@@ -8,7 +7,6 @@ module.exports = {
     devtool: "inline-source-map",
     module: {
         rules: [
-            // TypeScript
             {
                 test: /\.tsx?$/,
                 use: "ts-loader",
@@ -38,5 +36,4 @@ module.exports = {
         fs: "empty",
         net: "empty",
     },
-    plugins: [new Dotenv()],
 };

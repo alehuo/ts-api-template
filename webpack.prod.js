@@ -1,5 +1,4 @@
 const path = require("path");
-const Dotenv = require("dotenv-webpack");
 const Minimify = require("babel-minify-webpack-plugin");
 
 module.exports = {
@@ -27,7 +26,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".purs"],
+        extensions: [".ts", ".js", ".purs"],
     },
     output: {
         filename: "bundle.js",
@@ -37,5 +36,5 @@ module.exports = {
         fs: "empty",
         net: "empty",
     },
-    plugins: [new Dotenv(), new Minimify()],
+    plugins: [new Minimify()],
 };

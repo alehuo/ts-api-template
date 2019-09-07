@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+    possu:
+      image: postgres:10-alpine
+      restart: always
+      environment:
+        POSTGRES_DB: api_data
+        POSTGRES_PASSWORD: unsecure
+      ports:
+        - 5432:5432
+    api:
+      build:
+        dockerfile: Dockerfile
+      restart: always
+      environment:
+        PORT: 3000
+        DB_CONNECTION_STRING: postgres://root:unsecure@possu:5432/api_data
+      ports:
+        - 3000:80
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
