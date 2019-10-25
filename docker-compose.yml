@@ -1,24 +1,44 @@
 version: "3.7"
+volumes:
+  redis-data:
+  db-data:
 services:
     possu:
       image: postgres:10-alpine
       restart: always
       environment:
         POSTGRES_DB: api_data
+        POSTGRES_USER: postgres
         POSTGRES_PASSWORD: unsecure
       ports:
         - 5432:5432
+      volumes:
+        - db-data:/var/lib/postgresql/data
     api:
       build:
+        context: .
         dockerfile: Dockerfile
       restart: always
       environment:
-        PORT: 3000
-        DB_CONNECTION_STRING: postgres://root:unsecure@possu:5432/api_data
+        API_PORT: 3000
+        REDIS_PORT: 6379
+        REDIS_HOST: redis
+        REDIS_DB: 0
+        REDIS_AUTH_PASS: password123
+        SESSION_SECRET: UNSECURE
+        DB_CONNECTION_STRING: postgres://postgres:unsecure@possu:5432/api_data
       ports:
-        - 3000:80
+        - 3000:3000
     adminer:
       image: adminer
       restart: always
       ports:
         - 8080:8080
+    redis:
+      image: 'bitnami/redis:latest'
+      ports:
+        - 6379:6379
+      environment:
+        REDIS_PASSWORD: password123
+      volumes:
+        - 'redis-data:/bitnami'

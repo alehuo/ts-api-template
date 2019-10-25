@@ -1,5 +1,6 @@
 const path = require("path");
 const Minimify = require("babel-minify-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
     entry: "./src/index.ts",
@@ -37,4 +38,5 @@ module.exports = {
         net: "empty",
     },
     plugins: [new Minimify()],
+    externals: [nodeExternals()],
 };
