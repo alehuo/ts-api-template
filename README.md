@@ -10,24 +10,24 @@ A template for boilerplating a Node.js TypeScript Express API. Support for impor
 - Node.js 10.16.2
 - Docker
 
-## Instructions
+## Installation instructions
 
 1. Run `bower install`
 2. Run `npm install`
-3. Run `npm run build` to build a production bundle
-4. Run `npm start` to start the server
 
-## Development
+### Development
 
-1. Run `bower install`
-2. Run `npm install`
-3. Run `npm run build:dev` to start webpack in watch mode
-4. Run `npm start:dev` to start nodemon
+1. Run `npm run build` to bundle the app
+2. Run `npm start` to start the app
 
-## Docker
+### Production
 
-1. Run `docker build . -t ts-api`
-2. Run `docker run -it -p 80:8080 tsapi:latest`
+1. Run `npm run build:dev` to start webpack in watch mode
+2. Run `npm start:dev` to start nodemon
+
+### With Docker
+
+You can run the whole stack with `docker-compose up -d --build`.
 
 ## License
 
