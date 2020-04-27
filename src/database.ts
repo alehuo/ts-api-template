@@ -1,4 +1,4 @@
 import { Sequelize } from "sequelize";
-import { dbConnectionString } from "./config";
+import { dbConfig } from "./config";
 
-export default new Sequelize(dbConnectionString);
+export default new Sequelize(dbConfig.connectionString);

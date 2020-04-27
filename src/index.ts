@@ -10,11 +10,14 @@ import redis from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
 
+import swaggerUi from "swagger-ui-express";
+
 import GcdController from "./controllers/GcdController";
 import PostController from "./controllers/PostController";
 
-import { port, redis_host, redis_port, redis_db, redis_auth_pass, session_secret } from "./config";
+import { redisConfig, appConfig } from "./config";
 import database from "./database";
+import { swaggerSpec } from "./swagger";
 
 const app = express();
 
@@ -27,19 +30,20 @@ app.use(helmet());
 app.use(morgan("tiny"));
 app.use(
     session({
-        secret: session_secret,
+        secret: appConfig.sessionSecret,
         name: "_session",
         resave: false,
         saveUninitialized: true,
         cookie: { secure: false }, // Note that the cookie-parser module is no longer needed
         store: new sessionRedisStore({
-            host: redis_host,
-            port: redis_port,
+            host: redisConfig.host,
+            port: redisConfig.port,
             client: redis.createClient({
-                host: redis_host,
-                port: redis_port,
-                db: redis_db,
-                auth_pass: redis_auth_pass,
+                host: redisConfig.host,
+                port: redisConfig.port,
+                db: redisConfig.db,
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                auth_pass: redisConfig.authPass,
             }),
             ttl: 86400,
         }),
@@ -49,15 +53,24 @@ app.use(
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: 40, // 40 requests per minute
-    store: RedisStore({
+    store: new RedisStore({
         client: redis.createClient({
-            host: redis_host,
-            port: redis_port,
-            db: redis_db,
-            auth_pass: redis_auth_pass,
+            host: redisConfig.host,
+            port: redisConfig.port,
+            db: redisConfig.db,
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            auth_pass: redisConfig.authPass,
         }),
     }),
 });
+
+app.use("/docs", swaggerUi.serve);
+app.get(
+    "/docs",
+    swaggerUi.setup(swaggerSpec, {
+        explorer: true,
+    }),
+);
 
 app.use("/posts", limiter, PostController);
 app.use("/gcd", limiter, GcdController);
@@ -67,12 +80,12 @@ database
     .then(() => {
         console.log("Database connection has been established successfully.");
     })
-    .catch((err: any) => {
+    .catch((err) => {
         console.error("Unable to connect to the database:", err);
     });
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+app.listen(appConfig.port, () => {
+    console.log(`App listening on port ${appConfig.port}`);
 });
 
 process.on("SIGINT", () => {
