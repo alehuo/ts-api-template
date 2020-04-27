@@ -17,13 +17,15 @@ A template for boilerplating a Node.js TypeScript Express API. Support for impor
 
 ### Development
 
-3. Run `npm run build` to bundle the app
-4. Run `npm start` to start the app
+The development environment starts webpack in watch mode. The bundled app is then monitored with nodemon.
+
+- Run `npm run build` to bundle the app
+- Run `npm start` to start the app
 
 ### Production
 
-3. Run `npm run build:dev` to start webpack in watch mode
-4. Run `npm start:dev` to start nodemon
+- Run `npm run build:dev` to start webpack in watch mode
+- Run `npm start:dev` to start nodemon
 
 ### With Docker
 
