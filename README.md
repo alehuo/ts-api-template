@@ -2,7 +2,7 @@
 
 ![](assets/img/ts-api-1x.png)
 
-A template for boilerplating a Node.js TypeScript Express API. Support for importing PureScript modules is included. Database migrations are made with Sequelize.
+A template for boilerplating a Node.js TypeScript Express API. Support for importing PureScript modules is included. Database migrations are made with Sequelize. Swagger endpoint is located at `/docs` to add documentation for your API.
 
 ## Requirements
 
