@@ -6,10 +6,10 @@ RUN adduser --disabled-password --gecos "" apiuser && \
 
 USER apiuser
 
-RUN npm install -g purescript pulp bower
+RUN npm install -g purescript spago
 
-COPY bower.json .
-RUN bower install
+COPY packages.dhall spago.dhall ./
+RUN spago install
 
 COPY package*.json .eslintrc.js .eslintignore webpack*.js tsconfig.json ./
 RUN npm install

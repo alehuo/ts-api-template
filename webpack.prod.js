@@ -19,7 +19,7 @@ module.exports = {
                     {
                         loader: "purs-loader",
                         options: {
-                            src: ["bower_components/purescript-*/src/**/*.purs", "src/**/*.purs"],
+                            spago: true,
                         },
                     },
                 ],
